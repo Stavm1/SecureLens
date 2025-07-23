@@ -1,0 +1,181 @@
+﻿body {
+    direction: rtl;
+    font-family: "Rubik";
+    /*    background-color: #e3f2fd;
+*/ background-color: #f2f8fc;
+    line-height: 1.5;
+    font-size: 20px;
+}
+
+h1, h2, h3 {
+   
+    color: #1a237e;
+}
+
+#regulationNote {
+    font-size: 18px;
+}
+
+.fieldHeader {
+    font-weight:bold;
+}
+
+
+.categoryTitle {
+    font-weight: bold;
+    font-size: 28px;
+    color: #0d47a1;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #1a237e;
+    padding-bottom: 5px;
+}
+
+.categoryTitleThreat {
+    font-weight: bold;
+    font-size: 34px;
+    color: #83cafc;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.threatDescription {
+    font-weight: bold;
+    font-size: 22px;
+    color: #83cafc;
+}
+
+.regulationText {
+    color: darkred;
+    font-weight: bold;
+}
+
+
+.requirementText {
+    background-color: #acd5f2;
+    border: 1px solid #cfd8dc;
+    border-radius: 15px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    line-height: 1.7;
+    direction: rtl;
+}
+
+.resultsContainer {
+    border-radius: 10px;
+}
+
+
+.requirementText strong {
+    color: #002060;
+    display: inline-block;
+    margin-bottom: 3px;
+}
+
+#SecurityRequirementsText {
+    border: none;
+    padding: 20px; /* רווח פנימי מהגבול */
+    border-radius: 15px; /* פינות מעוגלות */
+}
+
+.threatTextDesign {
+    border: none;
+    padding: 5px 20px 20px 20px;
+    border-radius: 15px;
+    background-color: #002060;
+    font-weight: bold;
+    color: #83cafc;
+    /*    margin: auto auto;
+*/ font-size: 20px;
+    width: 1110px;
+}
+
+.RequirementsBigTitle {
+    font-weight: bold;
+    font-size: 40px;
+    color: #0d47a1;
+    margin-top: 40px;
+
+}
+
+#sumTitle {
+    font-weight: bold;
+    font-size: 54px;
+    color: #0d47a1;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+/*    text-align: center;
+*/}
+
+h1 {
+    text-align: center;
+    color: #0d47a1;
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #0d47a1;
+    font-size: 28px;
+    border-bottom: 2px solid #90caf9;
+    padding-bottom: 5px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.Button {
+    text-align: center;
+    padding: 10px;
+    background-color: #0d47a1;
+    font-family: "Rubik";
+    font-weight: bold;
+    font-size: 18px;
+    color: aliceblue;
+    border-radius: 15px;
+    border: 0px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+    .Button:hover {
+        background-color: #b7dcf7; /* צבע כחול בהיר יותר */
+        color: #0d47a1;
+    }
+
+
+#titleImage {
+    text-align: center;
+    /*margin-top: 30px;
+    margin-bottom: 40px;*/
+    margin: 0;
+    padding: 0;
+}
+
+#titleImage img {
+    /*max-width: 100%;*/
+    width:100%;
+    height: auto;
+
+}
+
+.errorText {
+    color: red;
+   
+}
+
+
+
+#openingText {
+    font-weight: bold;
+    color: ghostwhite;
+    background-color: #002060;
+    border: 1px solid #cfd8dc;
+    border-radius: 15px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    width: 880px;
+    line-height: 1.7;
+}
