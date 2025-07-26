@@ -1,6 +1,7 @@
 ﻿var totalThreatCount; //משתנה לניקוד האיום
 var protectionRequirementsText = ""; //משתנה לטקסט דרישות ההגנה
 var infoTypeText = ""; //משתנה לטקסט הערת סוג המידע
+var regulationText = ""; //משתנה להוספת הערת עמידה ברגולציה לפי סוג המידע בפלט השאלון
 
 //משתנים לכותרות של הדרישות - על מנת שאותה כותרת לא תופיע פעמיים במקרה של מס' דרישות
 var addedCategory_Hizdahut = false;
@@ -34,10 +35,13 @@ addedCategory_MediaDisposal = false;
 addedCategory_EquipmentNetworkTransfer = false;
 addedCategory_ServerRoomSecurity = false;
 addedCategory_OfficeSecurity = false;
-    addedCategory_SupplyChain = false;
+addedCategory_SupplyChain = false;
 
     //איפוס הצגת הערת סוגי הנתונים למעלה
     showNote = false; 
+
+    //איפוס הצגת הערת סוגי הנתונים למעלה
+    regulationText= "";
 
     // איפוס שגיאות בתחילת הבדיקה
     document.getElementById("generalFormError").innerHTML = ""; 
@@ -780,7 +784,7 @@ if (MoreSecurityToolsValue == "") {
     // אם ענו "כן" על חיבור מהבית ולא בחרו את סוג המחשב
     if (workFromHomeValue == "כן" && remoteAccessDeviceValue == "") {
         document.getElementById("remoteAccessDeviceError").innerHTML = "יש לסמן דרך איזה מחשב מתבצע החיבור.";
-        return;
+        hasError = true;
     }
 
 
@@ -877,7 +881,7 @@ if (MoreSecurityToolsValue == "") {
     //הוספת ניקוד לאיום למול בחירת המשתמש
     if (trainingFrequencyValue == "לא") {
         totalThreatCount += 1;
-    }
+    } 
 
 
 
@@ -1967,7 +1971,7 @@ if (MoreSecurityToolsValue == "") {
     
 
 
-    if (immunityLevelValue == "1 - קריטית" || immunityLevelValue == "2 - גבוהה מאוד" || immunityLevelValue == "3 - גבוהה" || classificationValue == "ב - גבוה מאוד" || classificationValue == "א - קריטי") {
+    if (immunityLevelValue == "1 - קריטית" || immunityLevelValue == "2 - גבוהה מאוד" || classificationValue == "ב - גבוה מאוד" || classificationValue == "א - קריטי") {
 
 
         if (addedCategory_SupplyChain == false) {
@@ -2052,9 +2056,12 @@ if (MoreSecurityToolsValue == "") {
 
     document.getElementById("sumTitle").innerHTML = "תוצאות הסקר - מערכת " + nameValue;
 
+    if (showNote) { //יצירת הערת הרגולציה לפי סוג המידע שנבחר גם בחלק התחתון של הדרישות
+        regulationText = "<div class='regulationText' style='color: #002060;margin-top: 10px;margin-right: 10px'>* שימו לב כי יש לעמוד בתקן רגולציה מתאים לסוג המידע שנבחר.</div>";
+    }
+
     document.getElementById("SecurityRequirementsText").innerHTML ="<div class='threatTextDesign'>" + resultThreatText + "</div>" +
-        "<div class='regulationText' style='color: #002060;margin-top: 10px;margin-right: 10px'>* שימו לב כי יש לעמוד בתקן רגולציה מתאים לסוג המידע שנבחר.</div>" +
-        protectionRequirementsText;
+        regulationText + protectionRequirementsText;
 
 
     document.getElementById("resultsContainer").style.display = "block"; //ווידוא תצוגת הפלט, למקרה שאופס לפני והוסתר
@@ -2099,4 +2106,75 @@ function resetForm() {
     addedCategory_ServerRoomSecurity = false;
     addedCategory_OfficeSecurity = false;
     addedCategory_SupplyChain = false;
+}
+
+//פונקציות לאיפוס כפתורי הרישות תוך כדי הזנת השאלון
+function resetRemoteAccessDevice() { 
+    var radios = document.getElementsByName("remoteAccessDevice");
+
+    for (var i = 0; i < radios.length; i++) {
+        radios[i].checked = false; // מבטל סימון
+    }
+
+    // איפוס שגיאה אם הייתה מוצגת
+    document.getElementById("remoteAccessDeviceError").innerHTML = "";
+}
+
+
+function resetTrainingFrequency() {
+    var radios = document.getElementsByName("trainingFrequency");
+    for (var i = 0; i < radios.length; i++) {
+        radios[i].checked = false;
+    }
+
+    // איפוס הודעת השגיאה אם יש
+    document.getElementById("trainingFrequencyError").innerHTML = "";
+}
+
+
+//האזנה לשינויים בשאלות לאחריהן יש שאלות רשות למול הבחירה + פונקציות שמשנות את זמינות הכפתורים בהתאם
+window.onload = function () {
+    document.getElementById("AwarenessYes").addEventListener("change", toggleTrainingFrequency);
+    document.getElementById("AwarenessNo").addEventListener("change", toggleTrainingFrequency);
+    toggleTrainingFrequency(); // לוודא שמתחילים עם מצב תקין
+};
+
+function toggleTrainingFrequency() {
+    var awarenessYes = document.getElementById("AwarenessYes");
+    var trainingYes = document.getElementById("trainingFrequencyYes");
+    var trainingNo = document.getElementById("trainingFrequencyNo");
+
+    if (awarenessYes.checked) {
+        trainingYes.disabled = false;
+        trainingNo.disabled = false;
+    } else {
+        trainingYes.checked = false;
+        trainingNo.checked = false;
+        trainingYes.disabled = true;
+        trainingNo.disabled = true;
+
+        // איפוס הודעת השגיאה קודם
+        document.getElementById("trainingFrequencyError").innerHTML = "";
+
+    }
+}
+
+
+function toggleRemoteAccess() {
+    var homeYes = document.getElementById("workFromHomeYes");
+    var devicePersonal = document.getElementById("remoteAccessDevicePersonal");
+    var deviceWork = document.getElementById("remoteAccessDeviceWork");
+
+    if (homeYes.checked) {
+        devicePersonal.disabled = false;
+        deviceWork.disabled = false;
+    } else {
+        devicePersonal.checked = false;
+        deviceWork.checked = false;
+        devicePersonal.disabled = true;
+        deviceWork.disabled = true;
+        // איפוס הודעת השגיאה למקרה שהופיעה
+        document.getElementById("remoteAccessDeviceError").innerHTML = "";
+
+    }
 }

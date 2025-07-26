@@ -15,8 +15,13 @@
     <!-- Scripts -->
     <script src="jScripts/jquery-3.6.0.min.js"></script>
     <script src="jScripts/JavaScript.js" type="text/javascript"></script>
+    <!-- הוספת הגופן Rubik -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
+
+    <!-- קובץ העיצוב שלך -->
+    <link rel="stylesheet" href="styles/myStyle.css" />
+    <title>מערכת SecureLens</title>
 </head>
-<title>מערכת SecureLens</title>
 <body>
     <!--<form onsubmit="submitForm(); return false;">-->
     <div id="titleImage">
@@ -284,7 +289,7 @@
 
 
 
-            <label class="fieldHeader" for="networkType">האם הרשת פרוסה קווית או אלחוטית? </label><br />
+            <label class="fieldHeader" for="networkType">האם הרשת פרוסה קווית או אלחוטית? (אם חלק קווית וחלק אלחוטית יש לסמן אלחוטית) </label><br />
 
             <input type="radio" id="networkTypeWired" name="networkType" value="קווית" required>
             <label for="networkTypeWired">קווית</label><br>
@@ -372,10 +377,10 @@
 
             <label class="fieldHeader" for="workFromHome">האם ניתן להתחבר למערכת מהבית? </label><br />
 
-            <input type="radio" id="workFromHomeYes" name="workFromHome" value="כן" required>
+            <input type="radio" id="workFromHomeYes" name="workFromHome" value="כן" onclick="toggleRemoteAccess()" required>
             <label for="workFromHomeYes">כן</label><br>
 
-            <input type="radio" id="workFromHomeNo" name="workFromHome" value="לא">
+            <input type="radio" id="workFromHomeNo" name="workFromHome" value="לא" onclick="toggleRemoteAccess()">
             <label for="workFromHomeNo">לא</label><br>
             <p id="workFromHomeError" class="errorText"></p>
             <br />
@@ -386,11 +391,12 @@
 
             <label class="fieldHeader" for="remoteAccessDevice">אם מתחברים מהבית, דרך איזה מחשב מתבצע החיבור? (רשות) </label><br />
 
-            <input type="radio" id="remoteAccessDevicePersonal" name="remoteAccessDevice" value="מחשב אישי">
+            <input type="radio" id="remoteAccessDevicePersonal" name="remoteAccessDevice" value="מחשב אישי" disabled>
             <label for="remoteAccessDevicePersonal">מחשב אישי</label><br>
 
-            <input type="radio" id="remoteAccessDeviceWork" name="remoteAccessDevice" value="מחשב עבודה">
+            <input type="radio" id="remoteAccessDeviceWork" name="remoteAccessDevice" value="מחשב עבודה" disabled>
             <label for="remoteAccessDeviceWork">מחשב עבודה</label><br>
+            <button type="button" class="ButtonReset" onclick="resetRemoteAccessDevice()">איפוס</button>
             <p id="remoteAccessDeviceError" class="errorText"></p>
             <br />
 
@@ -426,10 +432,10 @@
 
             <label class="fieldHeader" for="awareness"> האם עובדים עוברים הדרכה בתחום אבטחת המידע? </label><br />
 
-            <input type="radio" id="AwarenessYes" name="awareness" value="כן" required>
+            <input type="radio" id="AwarenessYes" name="awareness" value="כן"  required>
             <label for="AwarenessYes">כן</label><br>
 
-            <input type="radio" id="AwarenessNo" name="awareness" value="לא">
+            <input type="radio" id="AwarenessNo" name="awareness" value="לא" >
             <label for="AwarenessNo">לא</label><br>
             <p id="awarenessError" class="errorText"></p>
             <br />
@@ -439,11 +445,12 @@
 
             <label class="fieldHeader" for="trainingFrequency"> במידה וקיימת הדרכה, האם ההדרכה מתבצעת באופן עיתי? (רשות) </label><br />
 
-            <input type="radio" id="trainingFrequencyYes" name="trainingFrequency" value="כן">
+            <input type="radio" id="trainingFrequencyYes" name="trainingFrequency" value="כן" disabled>
             <label for="trainingFrequencyYes">כן</label><br>
 
-            <input type="radio" id="trainingFrequencyNo" name="trainingFrequency" value="לא">
+            <input type="radio" id="trainingFrequencyNo" name="trainingFrequency" value="לא" disabled>
             <label for="trainingFrequencyNo">לא</label><br>
+            <button type="button" class="ButtonReset" onclick="resetTrainingFrequency()">איפוס</button>
             <p id="trainingFrequencyError" class="errorText"></p>
             <br />
 
@@ -602,7 +609,7 @@
             <h2> סיווג</h2><br />
 
 
-            <label class="fieldHeader" for="classification">מה הסיווג של פריט בודד או צבר המידע במערכת? </label><br />
+            <label class="fieldHeader" for="classification">מה סיווג המידע במערכת? </label><br />
 
             <input type="radio" id="classificationCritical" name="classification" value="א - קריטי">
             <label for="classificationCritical">א - קריטי</label><br>

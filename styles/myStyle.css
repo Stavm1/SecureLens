@@ -25,7 +25,7 @@ h1, h2, h3 {
     font-weight: bold;
     font-size: 28px;
     color: #0d47a1;
-    margin-bottom: 15px;
+    margin-bottom: 15px;Button
     border-bottom: 2px solid #1a237e;
     padding-bottom: 5px;
 }
@@ -141,6 +141,28 @@ h2 {
 
     .Button:hover {
         background-color: #b7dcf7; /* צבע כחול בהיר יותר */
+        color: #0d47a1;
+    }
+
+
+.ButtonReset {
+    text-align: center;
+    padding: 4px 10px; /* פחות גובה ורוחב */
+    background-color: #0d47a1;
+    font-family: "Rubik";
+    font-weight: bold;
+    font-size: 14px; /* פונט קטן יותר */
+    color: aliceblue;
+    border-radius: 10px;
+    border: 0px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+    .ButtonReset:hover {
+        background-color: #b7dcf7;
         color: #0d47a1;
     }
 
